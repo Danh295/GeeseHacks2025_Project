@@ -8,7 +8,7 @@ import useRouter from 'next/navigation';
 
 export const Challenge: React.FC<ChallengeCardProps> = ({title, description, image, onClick}) => {
     return (
-        <Card className="max-w-sm"
+        <Card className="max-w-xs"
         imgAlt = "Image not found"
         imgSrc = {image}
         >
