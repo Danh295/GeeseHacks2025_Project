@@ -3,19 +3,98 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #FFFBF6;
   --foreground: #171717;
+  --text-black: #222222;
+  --error-red: #ff4343;
+
+  --primary-yellow: #ecac04;
+  --secondary-yellow: #fada86;
+  --primary-teal: #043c48;
+  --secondary-teal: #7098A0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #171717;
+    --foreground: #FFFBF6;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inter", sans-serif;
+  text-transform: none;
+  font-weight: 500;
+  color: var(--text-black);
+}
+
+h1 {
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+p {
+	font-family: "Jost", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--text-black);
+}
+
+a {
+	text-decoration: underline;
+	color: var(--primary-yellow);
+	font-family: "Jost", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+  
+::-webkit-scrollbar-track {
+	margin: 10px;
+  background-color: #ececec;
+	border-radius: 16px;
+}
+  
+::-webkit-scrollbar-thumb {
+	background-color: rgb(199, 196, 196);
+  border-radius: 16px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	cursor: pointer;
+	background-color: #b0b0b0;
+  transition: background-color 0.3s ease;
 }

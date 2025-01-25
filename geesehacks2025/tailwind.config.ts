@@ -13,6 +13,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'text-black': 'var(--text-black)', // Custom black text
+        'error-red': 'var(--error-red)', // Custom error red
+        'primary-yellow': 'var(--primary-yellow)', // Custom primary yellow
+        'secondary-yellow': 'var(--secondary-yellow)', // Custom secondary yellow
+        'primary-teal': 'var(--primary-teal)', // Custom primary teal
       },
     },
   },
