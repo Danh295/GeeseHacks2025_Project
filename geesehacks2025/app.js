@@ -1,16 +1,52 @@
-import OpenAI from "openai";
-const openai = new OpenAI({apiKey: ""});
 
-const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-        { role: "system", content: "You are a helpful assistant." },
-        {
-            role: "user",
-            content: "Write a haiku about recursion in programming.",
-        },
-    ],
-    store: true,
+
+
+const express = require("express");
+const cors = require("cors");
+const { OpenAI } = require("openai");
+require('dotenv').config();
+const { zodResponseFormat } = require("openai/helpers/zod");
+const { z } = require("zod");
+const app = express();
+const apiKey = process.env.API_KEY;
+app.use(express.json());
+app.use(cors());
+
+const Challenge = z.object({
+    name: z.string(),
+    dateStarted: z.string(),
+    description: z.string(),
+    dateEnding: z.string(),
+    completed: z.boolean(),
+    reward: z.string(),
+    image: z.string(),
+  });
+  
+const openai = new OpenAI({apiKey: apiKey});
+
+app.post("/api/message", async (req, res) => {
+  const userMessage = req.body.message;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        { role: "system", content: "You are a chatbot for an insurance company SunLife, who helps users in a friendly way often adding emojis at the end of sentences. You are catered toward students, and offer financial advice and help students create realistic financial goals including investments, insurance claims, and budgeting" },
+        { role: "user", content: userMessage },
+      ],
+    });
+
+    const reply = completion.choices[0].message.content;
+
+    res.status(200).json({ reply });
+  } catch (error) {
+    console.error("Error communicating with GPT-4o Mini API:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-console.log(completion.choices[0].message);
+const PORT = 5005;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
