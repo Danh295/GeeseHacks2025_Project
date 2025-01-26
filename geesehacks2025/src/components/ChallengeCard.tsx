@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ChallengeCardProps } from '@/types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faPencil, faTimes } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
 
 // import { Card } from 'flowbite-react';
 // import Link from 'next/link';
@@ -34,9 +35,24 @@ export const ChallengeCard: React.FC<ChallengeCardProps> = ({
       setAmount(newValue);
   };
 
-  const handleDelete = () => {
-    console.log('Deleted');
-  }
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete("http://localhost:5005/api/challenges", {
+        data: { name }, // Axios allows sending data in the body of a DELETE request
+      });
+  
+      if (response.status === 200) {
+        console.log("Challenge deleted successfully");
+        window.location.reload()
+        // Perform any UI updates after successful deletion
+      } else {
+        console.error("Failed to delete challenge");
+      }
+    } catch (error) {
+      console.error("Error deleting challenge:", error);
+      alert("Failed to delete challenge. Please try again.");
+    }
+  };
 
   useEffect(() => {
     console.log(name, description, currentAmount, goalAmount, reward, image);
