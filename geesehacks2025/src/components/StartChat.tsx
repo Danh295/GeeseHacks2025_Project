@@ -132,6 +132,7 @@ export default function StartChat() {
           onChange={(e) => setMessage(e.target.value)}
           sizing="lg"
           className="w-full"
+          onKeyDown={(e) => {if (e.key === "Enter") handleSendMessage()}}
         />
         <Button
           style={{
