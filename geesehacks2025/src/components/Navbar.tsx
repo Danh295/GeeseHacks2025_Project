@@ -8,14 +8,14 @@ export default function Navbar() {
   const pathname = usePathname(); // Get the current active path
 
   const navLinks = [
+    { icon: <FaHome />, path: "/" },
     { icon: <FaTrophy />, path: "/challenges" },
     { icon: <FaComments />, path: "/chat" },
-    { icon: <FaHome />, path: "/" },
-    { icon: <FaBook />, path: "/learn" },
+    { icon: <FaShoppingCart />, path: "/shop" },
   ];
 
   return (
-    <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-3/5 h-[55px] bg-white flex items-center justify-between px-6 rounded-full shadow-lg border border-gray-200">
+    <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-3/5 h-[55px] bg-white flex items-center justify-between px-6 rounded-full shadow-lg">
       {/* Navigation Links */}
       <div className="flex flex-1 justify-evenly">
         {navLinks.map((link) => (
