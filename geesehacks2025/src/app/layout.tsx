@@ -39,8 +39,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        <Navbar/>
+        {/* The children (main content) will change on page navigation */}
+        <div className="min-h-screen flex flex-col">
+          {children}
+          <Navbar /> {/* Navbar stays persistent */}
+        </div>
       </body>
     </html>
   );
