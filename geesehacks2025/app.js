@@ -107,7 +107,7 @@ app.post("/api/message", async (req, res) => {
 
         // Generate an image using DALL·E
         const dalleResponse = await openai.images.generate({
-          prompt: `${challengeUpdate.description}` ,
+          prompt: `Create a detailed, full-background image inspired by the following challenge: “${challengeUpdate.description}”. The scene should be vibrant, imaginative, and lighthearted, with colorful and engaging elements that match the playful tone of the challenge. Ensure the style is fun and cheerful, avoiding any inclusion of text or written characters in the image.` ,
           n: 1,
           size: "256x256",
         });
