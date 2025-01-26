@@ -6,10 +6,10 @@ export default function Shop(){
   const [points, setPoints] = useState(1000);
 
   const items = [
-    { id: 1, name: "Self-help Books", price: 300, description: "For those tryna carry the godamn boats." },
-    { id: 2, name: "Free Gym Pass", price: 200, description: "For those tryna get big as hell." },
-    { id: 3, name: "Weekend Doom Scroll", price: 400, description: "Unleash your inner procrastiner, drown in endless hours of meaningless stimulation over the weekend." },
-    { id: 4, name: "Memes for Days", price: 150, description: "Unleash endless euphoria, unlimited dopamine, limitless potential, for the next 3 days." },
+    { id: 1, name: "Campus Merch", price: 300, description: "Show off your school spirit with exclusive campus gear." },
+    { id: 2, name: "15% off Textbook Purchases", price: 200, description: "Save big on textbooks for the term." },
+    { id: 3, name: "$35 Cash Back", price: 400, description: "Get rewarded with cash for your savings, or splurge." },
+    { id: 4, name: "Free Coffee at the Campus Cafe", price: 150, description: "Fuel your next all-nighter." },
   ];
 
   const handlePurchase = (price: number) => {
@@ -24,8 +24,7 @@ export default function Shop(){
   return (
     <div className="flex flex-col items-left p-6">
       <span className="inline-flex">
-        <h1>Welcome to the&nbsp;</h1>
-        <h1 className="text-primary-yellow">Shop!</h1>
+        <h1 className="text-primary-yellow">Rewards Shop</h1>
       </span>
       <h3 className="mb-6 font-light">You have <span className="font-semibold">{points}</span> points to spend.</h3>
 
