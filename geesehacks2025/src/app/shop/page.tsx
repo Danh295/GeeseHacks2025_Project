@@ -6,10 +6,10 @@ export default function Shop(){
   const [points, setPoints] = useState(1000);
 
   const items = [
-    { id: 1, name: "Campus Merch", price: 300, description: "Show off your school spirit with exclusive campus gear." },
-    { id: 2, name: "15% off Textbook Purchases", price: 200, description: "Save big on textbooks for the term." },
-    { id: 3, name: "$35 Cash Back", price: 400, description: "Get rewarded with cash for your savings, or splurge." },
-    { id: 4, name: "Free Coffee at the Campus Cafe", price: 150, description: "Fuel your next all-nighter." },
+    { id: 1, name: "Campus Merch", price: 300, description: "Show off your school spirit with exclusive campus gear.", image: "https://cdn-icons-png.flaticon.com/512/5530/5530523.png" },
+    { id: 2, name: "15% off Textbook Purchases", price: 200, description: "Save big on textbooks for the term.", image: "https://cdn-icons-png.flaticon.com/512/3561/3561304.png" },
+    { id: 3, name: "$35 Cash Back", price: 400, description: "Get rewarded with cash for your savings, or splurge.", image: "https://cdn-icons-png.flaticon.com/512/7514/7514355.png" },
+    { id: 4, name: "Free Coffee at the Campus Cafe", price: 150, description: "Fuel your next all-nighter.", image: "https://cdn-icons-png.flaticon.com/512/10751/10751407.png" },
   ];
 
   const handlePurchase = (price: number) => {
