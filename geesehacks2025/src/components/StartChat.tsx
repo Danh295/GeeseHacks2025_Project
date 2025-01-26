@@ -32,6 +32,8 @@ export default function StartChat() {
     }
   };
 
+  
+
   // Handle sending messages
   const handleSendMessage = async () => {
     if (!message.trim()) return;

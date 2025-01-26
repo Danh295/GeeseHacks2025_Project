@@ -1,13 +1,29 @@
 const express = require("express");
 const cors = require("cors");
 const { OpenAI } = require("openai");
+const {MongoClient} = require('mongodb')
 require("dotenv").config();
 const app = express();
 const apiKey = process.env.API_KEY;
-
+const uri = process.env.MONGODB_URI;
+// Code to kill port: lsof -ti:5005 | xargs kill -9
 app.use(express.json());
 app.use(cors());
-
+const client = new MongoClient(uri);
+try{
+   
+    client.connect();
+    listDatabases()
+    } 
+    catch(e){
+        console.error(e)
+   }
+async function listDatabases(){
+    const databasesList = await client.db().admin().listDatabases()
+    databasesList.databases.forEach(db => {
+        console.log(`- ${db.name}`)
+    })
+}
 const openai = new OpenAI({ apiKey });
 
 let conversationHistory = [];
@@ -65,7 +81,11 @@ app.post("/api/message", async (req, res) => {
 
     // Append assistant's reply to the conversation history
     conversationHistory.push({ role: "assistant", content: assistantReply });
-
+    if(challengeUpdate){
+      console.log("Challenge Update: ", challengeUpdate)
+        const result = await client.db("sunlife_chats").collection("chats").insertOne(challengeUpdate)
+        console.log(`New challenge created with the following id: ${result.insertedId}`)
+    }
     res.status(200).json({ reply: assistantReply, challenge: challengeUpdate });
   } catch (error) {
     console.error("Error with GPT-4 API:", error.message);
