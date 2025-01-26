@@ -6,7 +6,7 @@
     "dev": "concurrently \"npm run api\" \"next dev --turbopack\"",
     "build": "next build",
     "api": "node app.js",
-    "start": "next start",
+    "start": "concurrently \"npm run api\" \"next start\"",
     "lint": "next lint"
   },
   "dependencies": {
