@@ -19,3 +19,11 @@ export interface MessageProps {
     message: string;
 }
 
+export interface LearningItemProps {
+    title: string;
+    description: string;
+    image: string;
+    longtext: string;
+    points: number;
+    time: number;
+}
