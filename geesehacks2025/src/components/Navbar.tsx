@@ -12,7 +12,7 @@ export default function Navbar() {
     { icon: <FaBook />, path: "/learn" },
     { icon: <FaComments />, path: "/chat" },
     { icon: <FaShoppingCart />, path: "/shop" },
-    { icon: <FaUser />, path: "https://www.linkedin.com/in/kevindstrain/?originalSubdomain=ca" },
+    { icon: <FaUser />, path: "https://www.linkedin.com/in/kevindstrain/?originalSubdomain=ca", external: true },
   ];
 
   return (
@@ -23,6 +23,8 @@ export default function Navbar() {
           <a
             key={link.path}
             href={link.path}
+            target={link.external? "_blank" : "_self"}
+            rel={link.external? "noopener noreferrer" : undefined}
             className={`flex items-center justify-center ${
               pathname === link.path ? "text-primary-yellow" : "text-gray-400"
             } hover:text-primary-yellow transition-colors`}
