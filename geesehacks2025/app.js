@@ -30,6 +30,33 @@ let conversationHistory = [];
 let currentChallenge = null;
 
 
+app.get("/api/points", async (req, res) => {
+  try {
+    const points = client.db("sunlife_chats").collection("points").find(name = "points");
+    res.status(200).json({ points });
+  } catch (error) {
+    console.error("Error retrieving points:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+
+})
+
+app.post("/api/points", async (req, res) => {
+  const points = req.body.points;
+  try {
+    const result = await client.db("sunlife_chats").collection("points").updateOne(
+      { name: "points" },
+      { $set: { points: points } },
+      { upsert: true }
+    );
+    res.status(200).json({ result });
+  } catch (error) {
+    console.error("Error updating points:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+)
+
 app.get("/api/challenges", async (req, res) => {
   try {
     const challenges = await client.db("sunlife_chats").collection("chats").find().toArray()
