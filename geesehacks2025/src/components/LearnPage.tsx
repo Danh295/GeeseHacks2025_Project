@@ -41,7 +41,7 @@ export default function LearnPage() {
   ];
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <main className="flex flex-col items-center justify-center min-h-screen bg-background">
       <div className="w-11/12 max-w-5xl bg-white shadow-md rounded-2xl p-6 space-y-6">
         <Label className="text-xl font-bold text-gray-800">Education Centre</Label>
         <div className="flex flex-row space-x-4 overflow-x-auto p-2">

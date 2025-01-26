@@ -58,7 +58,7 @@ export default function StartChat() {
   }, [messages]);
 
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen bg-white">
+    <main className="relative flex flex-col items-center justify-center min-h-screen bg-background">
       {/* Mesh Gradient Background */}
       <div className="absolute inset-0 z-0"></div>
 
