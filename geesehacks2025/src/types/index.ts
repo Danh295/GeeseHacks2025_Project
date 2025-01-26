@@ -1,11 +1,13 @@
 import { MouseEventHandler } from "react";
 
 export interface ChallengeCardProps {
-    title: string;
+    name: string;
     description: string;
-    imgSrc: string;
-    deadline: number;
-    onClick: MouseEventHandler;
+    currentAmount: number;
+    goalAmount: number;
+    reward: number;
+    image: string;
+    
 }
 
 export interface ChallengesCarouselProps {
