@@ -40,6 +40,23 @@ app.get("/api/challenges", async (req, res) => {
   }
 
 });
+app.delete("/api/challenges", async (req, res) => {
+  console.log("Request body:", req.body); // Debug incoming data
+  const { name } = req.body;
+
+  try {
+    const result = await client
+      .db("sunlife_chats")
+      .collection("chats")
+      .deleteOne({ name });
+
+    console.log(`Deleted ${result.deletedCount} challenge(s)`);
+    res.status(200).json({ message: `Deleted ${result.deletedCount} challenge(s)` });
+  } catch (error) {
+    console.error("Error deleting challenge:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 app.post("/api/message", async (req, res) => {
   const userMessage = req.body.message;
 
