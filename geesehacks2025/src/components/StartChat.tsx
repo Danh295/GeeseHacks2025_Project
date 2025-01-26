@@ -1,20 +1,27 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
 import axios from "axios";
 
 export default function StartChat() {
-
   const [showChat, setShowChat] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
- // Initialize the conversation with a greeting message when the component is mounted
+  const [isBotTyping, setIsBotTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null); // Ref for auto-scrolling
 
+  // Scroll to the latest message
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Initialize the conversation with a greeting message when the component is mounted
   const initConversation = async () => {
     try {
-      const response = await axios.post("http://localhost:5005/api/message", { message: "This is the message from the server telling you the conversation has started. Begin conversation with user now." });
+      const response = await axios.post("http://localhost:5005/api/message", {
+        message:
+          "This is the message from the server telling you the conversation has started. Begin conversation with user now.",
+      });
       // Add bot's initial message to the chat
       setMessages([{ role: "assistant", content: response.data.reply }]);
     } catch (error) {
@@ -22,30 +29,44 @@ export default function StartChat() {
     }
   };
 
- 
+  // Handle sending messages
   const handleSendMessage = async () => {
     if (!message.trim()) return;
-  
-    // Add user's message to the chat
+
+    // Add user's message to the chat immediately
     setMessages((prev) => [...prev, { role: "user", content: message }]);
-  
+    setMessage(""); // Clear the input field right away
+
     try {
-      // Send message to the backend
+      // Show the typing indicator
+      setIsBotTyping(true);
+
+      // Send the message to the backend
       const response = await axios.post("http://localhost:5005/api/message", { message });
-  
-      // Add GPT's response to the chat (do not add the user's message again)
+      console.log("challenge: ")
+      console.log(response.data.challenge)
+      // Add GPT's response to the chat
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: response.data.reply },
       ]);
-  
-      setMessage(""); // Clear input field
+      
+
     } catch (error) {
       console.error("Error sending message:", error);
       alert("Failed to send message. Please try again.");
+    } finally {
+      // Hide typing indicator once response is received
+      setIsBotTyping(false);
     }
   };
+
   
+
+
+  useEffect(() => {
+    scrollToBottom(); // Scroll to the latest message whenever messages change
+  }, [messages]);
 
   if (!showChat) {
     return (
@@ -61,8 +82,8 @@ export default function StartChat() {
               borderColor: "var(--primary-yellow)",
             }}
             onClick={() => {
-              setShowChat(true)
-              initConversation()
+              setShowChat(true);
+              initConversation();
             }}
           >
             Start Chat!
@@ -101,6 +122,21 @@ export default function StartChat() {
               </div>
             </div>
           ))}
+
+          {/* Typing indicator */}
+          {isBotTyping && (
+            <div className="flex items-start space-x-2">
+              <div className="p-3 rounded-lg bg-gray-200">
+                <div className="animate-pulse">
+                  <div className="h-2.5 bg-gray-400 rounded w-24 mb-2"></div>
+                  <div className="h-2.5 bg-gray-400 rounded w-16"></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Scroll target */}
+          <div ref={messagesEndRef}></div>
         </div>
       </div>
 
@@ -127,6 +163,7 @@ export default function StartChat() {
         </Button>
       </div>
 
+      
     </main>
   );
 }
