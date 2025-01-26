@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react'
-import ChallengeCard from './Challenge';
+import ChallengeCard from './ChallengeCard';
 
 export default function Home() {
   return (
