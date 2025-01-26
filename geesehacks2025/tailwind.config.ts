@@ -24,4 +24,5 @@ export default {
   plugins: [
     flowbite.plugin(),
   ],
+  darkMode: 'media',
 } satisfies Config;
