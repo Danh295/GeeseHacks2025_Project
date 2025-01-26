@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-import { FaHome, FaTrophy, FaComments, FaShoppingCart } from "react-icons/fa";
+import { FaHome, FaTrophy, FaComments, FaShoppingCart, FaBook } from "react-icons/fa";
 
 export default function Navbar() {
   const pathname = usePathname(); // Get the current active path
@@ -11,7 +11,7 @@ export default function Navbar() {
     { icon: <FaTrophy />, path: "/challenges" },
     { icon: <FaComments />, path: "/chat" },
     { icon: <FaHome />, path: "/" },
-    { icon: <FaShoppingCart />, path: "/shop" },
+    { icon: <FaBook />, path: "/learn" },
   ];
 
   return (
