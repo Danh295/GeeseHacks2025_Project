@@ -18,7 +18,7 @@ export default function HomePage() {
       </div>
       <div className="relative h-[160px] flex flex-row justify-between gap-8">
         <PointsCard 
-        amount = {20}
+        amount = {1000}
         link = "/shop"
          />
           
