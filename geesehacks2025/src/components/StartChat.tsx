@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState, useRef } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
