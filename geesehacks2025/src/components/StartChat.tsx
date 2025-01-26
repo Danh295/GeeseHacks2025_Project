@@ -4,28 +4,29 @@ import React from 'react'
 import {Button, TextInput, Label } from 'flowbite-react'
 import { HiOutlineArrowRight } from "react-icons/hi";
 import {useState} from 'react'
+
 export default function StartChat() {
     const [showChat, setShowChat] = useState(false);
     const [message, setMessage] = useState("");
     if(!showChat){
   return (
-    <main className="flex justify-center min-h-screen">
-    <div>
-    <h1 className="text-2xl font-bold mb-4">Set your goals</h1>
-    <p className="text-gray-700 mb-6">
+    <main className="flex flex-col items-center justify-center h-screen">
+    <div className="space-y-5">
+    <h2>Set your goals</h2>
+    <p>
       Receive personalized, achievable goals related to your finances.
     </p>
-    <Button outline gradientDuoTone="redToYellow" onClick={() => setShowChat(true)}>
+    <Button style={{ backgroundColor: 'var(--primary-yellow)', borderColor: 'var(--primary-yellow)'}} onClick={() => setShowChat(true)}>
         Start Chat!
       </Button>
     </div>
     </main>
   )
 } return (
-  <main className="flex justify-center min-h-screen">
+    <main>
         
             
-        <div className="flex items-center space-x-2 text-left">
+        <div className="flex items-center justify-center h-screen space-x-2 max-w-full">
                      
                      <TextInput
                         id="message"
@@ -34,8 +35,9 @@ export default function StartChat() {
                         shadow
                         onChange={(e) => setMessage(e.target.value)}
                         sizing = "lg"
+                        className="w-3/4"
                       />
-                      <Button onClick={() => {}}>
+                      <Button style={{ backgroundColor: 'var(--primary-yellow)', borderColor: 'var(--primary-yellow)' }} onClick={() => {}}>
                       <HiOutlineArrowRight className="h-6 w-6" />
                         </Button>
                     </div>
@@ -47,3 +49,4 @@ export default function StartChat() {
     </main>
 )
 }
+
