@@ -61,7 +61,7 @@ const LeaderboardCard: React.FC<LeaderboardCardProps> = ({ rank, imgSrc, link = 
       <p className="text-white">Ranking:</p>
       <span className="flex flex-row justify-left items-left gap-4">
         <h1 className="text-white">#{rank}</h1>
-        <div className="-h-20 w-20 p-2 bg-background rounded-full shadow-lg m-2 mt-[-16px]">
+        <div className="h-20 w-20 p-2 bg-background rounded-full shadow-lg m-2 mt-[-16px]">
           <img
             src={imgSrc}
             alt="Image not found"
@@ -87,16 +87,16 @@ const TuitionCard: React.FC<TuitionCardProps> = ({ amount, total }) => {
     <div className="relative h-full w-full flex flex-col flex-grow justify-center items-start p-6 bg-secondary-yellow text-white rounded-2xl border-4 border-primary-yellow">
       <span className="w-full flex flex-row justify-between items-center">
         <h3 className="text-primary-yellow">Cash back towards tuition:</h3>
-        <h2 className="text-white font-black">${amount.toFixed(2)}</h2>
+        <h2 className="text-white font-extrabold">${amount.toFixed(2)}</h2>
       </span>
 
       {/* Progress bar */}        
-        <div className="w-full bg-white rounded-full h-2 mt-2">
-          <div
-            className={`bg-primary-yellow rounded-full h-full transition duration-300 ease-in-out`}
-            style={{ width: `${progressPercentage}%` }}
-          />
-        </div>
+      <div className="w-full bg-white rounded-full h-2 mt-2">
+        <div
+          className="bg-primary-yellow rounded-full h-full transition duration-300 ease-in-out"
+          style={{ width: `${progressPercentage}%` }}
+        />
+      </div>
     </div>
   );
 }
