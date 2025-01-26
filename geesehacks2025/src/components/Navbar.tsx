@@ -12,7 +12,7 @@ export default function Navbar() {
     { icon: <FaBook />, path: "/learn" },
     { icon: <FaComments />, path: "/chat" },
     { icon: <FaShoppingCart />, path: "/shop" },
-    { icon: <FaUser />, path: "/profile" },
+    { icon: <FaUser />, path: "https://www.linkedin.com/in/kevindstrain/?originalSubdomain=ca" },
   ];
 
   return (
