@@ -1,54 +1,52 @@
-"use client"
-import { Accordion, Card, Label } from 'flowbite-react'
-import React from 'react'
+"use client";
 
-
+import { Label } from "flowbite-react";
+import React from "react";
+import LearningItem from "./LearningItem";
+import { LearningItemProps } from "@/types";
 
 export default function LearnPage() {
-    return (
-        <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-3/4 max-w-3xl bg-white shadow-md rounded-2xl p-4 space-y-4">
-              <Label>Financial Literacy Tools</Label>
-              <div className="flex flex-row space-x-3 h-96 overflow-x-auto p-2">
-              <Card
-      className="max-w-sm"
-      imgAlt="Meaningful alt text for an image that is not purely decorative"
-      imgSrc="https://cdn.prod.website-files.com/60c843c7a86d865e99ca8b67/62bd4bf599bfeb3968cf9fde_passive%20index.png"
-    >
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Some title
-      </h5>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-      </p>
-    </Card>
-    <Card
-      className="max-w-sm"
-      imgAlt="Meaningful alt text for an image that is not purely decorative"
-      imgSrc="https://cdn.prod.website-files.com/60c843c7a86d865e99ca8b67/62bd4bf599bfeb3968cf9fde_passive%20index.png"
-    >
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Some title
-      </h5>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-      </p>
-    </Card>
-    <Card
-      className="max-w-sm"
-      imgAlt="Meaningful alt text for an image that is not purely decorative"
-      imgSrc="https://cdn.prod.website-files.com/60c843c7a86d865e99ca8b67/62bd4bf599bfeb3968cf9fde_passive%20index.png"
-    >
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Some title
-      </h5>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-      </p>
-    </Card>
-    </div>
-        
+  const learningItems: LearningItemProps[] = [
+    {
+      title: "Market Indicators",
+      description: "Learn about the macro economic indicators",
+      image:
+        "https://equitablegrowth.org/wp-content/uploads/2025/01/Benchmarking-the-U.S.-economy-1080x675.jpg",
+      points: 50,
+      time: 10,
+      longtext: "",
+    },
+    {
+      title: "Tracker",
+      description: "Interpret the economy based on the data you receive",
+      image:
+        "https://ibpf.org/wp-content/uploads/2020/08/Insta-Blog-Template-21-1080x675.png",
+      points: 75,
+      time: 12,
+      longtext: "",
+    },
+    {
+      title: "ETFs",
+      description: "What makes them so attractive over other tools?",
+      image:
+        "https://kenyanwallstreet.com/wp-content/uploads/2022/11/Univeris-Blog-Mastheads_1080x67_ETF25.png",
+      points: 150,
+      time: 15,
+      longtext: "",
+    },
+    
+  ];
+
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-11/12 max-w-5xl bg-white shadow-md rounded-2xl p-6 space-y-6">
+        <Label className="text-xl font-bold text-gray-800">Education Centre</Label>
+        <div className="flex flex-row space-x-4 overflow-x-auto p-2">
+          {learningItems.map((item, index) => (
+            <LearningItem key={index} {...item} />
+          ))}
+        </div>
       </div>
-      </main>
-    )
-  }
+    </main>
+  );
+}
