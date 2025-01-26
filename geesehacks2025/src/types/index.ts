@@ -24,6 +24,7 @@ export interface LearningItemProps {
     description: string;
     image: string;
     longtext: string;
+    ref: string;
     points: number;
     time: number;
 }

@@ -7,6 +7,7 @@ export const LearningItem: React.FC<LearningItemProps> = ({
   title,
   description,
   image,
+  ref,
   points,
   time,
   longtext,
@@ -48,6 +49,7 @@ export const LearningItem: React.FC<LearningItemProps> = ({
         <button
           className="absolute bottom-4 right-4 bg-primary-yellow p-2 rounded-full shadow-lg transition-transform duration-300 hover:scale-105 active:scale-95"
           aria-label="Next"
+          onClick={() => window.open(ref, "_blank")}
         >
           <HiOutlineArrowRight className="text-white h-6 w-6" />
         </button>
