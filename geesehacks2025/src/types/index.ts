@@ -8,6 +8,10 @@ export interface ChallengeCardProps {
     onClick: MouseEventHandler;
 }
 
+export interface ChallengesCarouselProps {
+    challenges: ChallengeCardProps[];
+}
+
 export interface MessageProps {
     message: string;
 }
