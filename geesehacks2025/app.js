@@ -1,3 +1,46 @@
+const express = require("express");
+const cors = require("cors");
+const { OpenAI } = require("openai");
+const {MongoClient} = require('mongodb')
+require("dotenv").config();
+const app = express();
+const apiKey = process.env.API_KEY;
+const uri = process.env.MONGODB_URI;
+// Code to kill port: lsof -ti:5005 | xargs kill -9
+app.use(express.json());
+app.use(cors());
+const client = new MongoClient(uri);
+try{
+   
+    client.connect();
+    listDatabases()
+    } 
+    catch(e){
+        console.error(e)
+   }
+async function listDatabases(){
+    const databasesList = await client.db().admin().listDatabases()
+    databasesList.databases.forEach(db => {
+        console.log(`- ${db.name}`)
+    })
+}
+const openai = new OpenAI({ apiKey });
+
+let conversationHistory = [];
+let currentChallenge = null;
+
+
+app.get("/api/challenges", async (req, res) => {
+  try {
+    const challenges = await client.db("sunlife_chats").collection("chats").find({}).toArray()
+    res.status(200).json({ challenges });
+  } catch (error) {
+    console.error("Error retrieving challenges:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+
+});
+// Endpoint to handle incoming messages
 app.post("/api/message", async (req, res) => {
   const userMessage = req.body.message;
 
@@ -54,8 +97,11 @@ app.post("/api/message", async (req, res) => {
       }
     }
 
-    // Append assistant's reply to the conversation history
-    conversationHistory.push({ role: "assistant", content: assistantReply });
+    // Remove the JSON object from the assistant's reply to the user
+    const sanitizedReply = assistantReply.replace(challengeRegex, '').trim();
+
+    // Append assistant's sanitized reply to the conversation history
+    conversationHistory.push({ role: "assistant", content: sanitizedReply });
 
     // If challengeUpdate exists, insert it into the database
     if (challengeUpdate) {
@@ -64,10 +110,16 @@ app.post("/api/message", async (req, res) => {
       console.log(`New challenge created with the following id: ${result.insertedId}`);
     }
 
-    // Respond to the client with the assistant's reply and challenge data (if any)
-    res.status(200).json({ reply: assistantReply, challenge: challengeUpdate });
+    // Respond to the client with the assistant's sanitized reply and challenge data (if any)
+    res.status(200).json({ reply: sanitizedReply, challenge: challengeUpdate });
   } catch (error) {
     console.error("Error with GPT-4 API:", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
+});
+
+
+const PORT = 5005;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
