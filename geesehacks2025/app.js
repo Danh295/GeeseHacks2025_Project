@@ -63,7 +63,7 @@ app.post("/api/message", async (req, res) => {
             "goalAmount": number,  // Total amount to save
             "reward": number,      // A reward for completing the goal
             "image": string,
-            "completionDate": string     // Placeholder for an image or image description
+            "completionDate": string     // Date in formatted string
           }
           Always include the updated "Challenge" object in JSON format but **do not** include it in the user-facing reply.
           Make it clear to the user when their challenge is created and inform them that they can view it and track their progress in the home page.
