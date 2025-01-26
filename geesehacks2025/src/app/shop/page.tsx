@@ -34,6 +34,7 @@ export default function Shop(){
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
         {items.map((item) => (
           <div key={item.id} className="p-4 border rounded-lg shadow-lg">
+            <img src={item.image} alt={item.name} className="w-full h-48 object-cover mb-4 rounded-lg" />
             <h2 className="text-x2l font-bold mb-2">{item.name}</h2>
             <p className="mb-4">{item.description}</p>
             <p className="text-lg font-semibold mb-4">Price: {item.price} points</p>
