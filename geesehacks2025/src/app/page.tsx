@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import ChallengesContainer from "@/components/ChallengesCarousel";
 import { ChallengeCardProps } from "@/types/index";
+import HomePage from "@/components/HomePage";
 
 export default function Home() {
   const [challengeList, setChallengeList] = useState<ChallengeCardProps[]>([]);
@@ -43,16 +44,14 @@ export default function Home() {
       console.error("Error fetching challenges:", error);
     }
   };
-  
-  
-  
 
   useEffect(() => {
     getChallenges();
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col">
+      <HomePage />
       <ChallengesContainer challenges={challengeList} />
     </div>
   );
