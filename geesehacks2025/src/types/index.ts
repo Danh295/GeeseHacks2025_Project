@@ -19,6 +19,8 @@ export interface CardProps {
     onClick: MouseEventHandler;
 }
 
+
 export interface MessageProps {
     message: string;
 }
+

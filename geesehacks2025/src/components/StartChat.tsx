@@ -6,6 +6,7 @@ import { HiOutlineArrowRight } from "react-icons/hi";
 import axios from "axios";
 
 export default function StartChat() {
+
   const [showChat, setShowChat] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
@@ -125,6 +126,7 @@ export default function StartChat() {
           <HiOutlineArrowRight className="h-6 w-6" />
         </Button>
       </div>
+
     </main>
   );
 }
