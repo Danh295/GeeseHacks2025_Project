@@ -22,7 +22,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #171717;
+    --background: #191932;
     --foreground: #FFFBF6;
   }
 }
@@ -72,7 +72,7 @@ a {
 	color: var(--primary-yellow);
 	font-family: "Jost", sans-serif;
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 700;
 }
 
 /* Global scrollbar styling */
