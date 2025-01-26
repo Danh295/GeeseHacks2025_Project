@@ -1,8 +1,8 @@
-import Challenge from './Challenge';
+import ChallengeCard from './Challenge';
 import StartChat from './StartChat';
 
 export {
-    Challenge,
+    ChallengeCard as Challenge,
     StartChat
 }
 

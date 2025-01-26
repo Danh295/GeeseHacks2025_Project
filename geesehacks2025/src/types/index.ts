@@ -3,7 +3,8 @@ import { MouseEventHandler } from "react";
 export interface ChallengeCardProps {
     title: string;
     description: string;
-    image: string;
+    imgSrc: string;
+    deadline: number;
     onClick: MouseEventHandler;
 }
 
