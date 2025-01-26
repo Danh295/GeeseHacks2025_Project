@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChallengeCardProps } from '@/types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faPencil, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 // import { Card } from 'flowbite-react';
 // import Link from 'next/link';
@@ -20,30 +20,40 @@ export const ChallengeCard: React.FC<ChallengeCardProps> = ({
   completionDate,
 }) => {
   // Calculate progress percentage
-  const progress =  (currentAmount / goalAmount) * 100;
-
-  const [completed, setIsCompleted] = useState(progress >= 100);
   const [isEditing, setIsEditing] = useState(false);
   const [amount, setAmount] = useState(currentAmount);
 
+  const progress = (amount / goalAmount) * 100;
+  const completed = progress >= 100;
+
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
-    if (!isNaN(newValue)) setAmount(newValue);
+    if (isNaN(newValue)) 
+      setAmount(0)
+    else 
+      setAmount(newValue);
   };
+
+  const handleDelete = () => {
+    console.log('Deleted');
+  }
 
   useEffect(() => {
     console.log(name, description, currentAmount, goalAmount, reward, image);
   }, []);
 
-  useEffect(() => {
-    if (progress >= 100) 
-      setIsCompleted(true);
-  }, [progress]);
-
   return (
     <div className="relative">
-      {/* Edit Button */}
-      <button
+
+      {/* Conditional Button (edit/delete card) */}
+      {completed
+        ? <button
+            onClick={handleDelete}
+            className="absolute top-[-10] right-2 w-10 h-10 z-[55] bg-red-500 p-[10] text-white rounded-full shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-md hover:bg-red-600 active:opacity-90 active:scale-95 active:shadow-inner"
+          >
+            <FontAwesomeIcon icon={faTimes} className="w-5 h-5" />
+          </button>
+      : (<button
         onClick={() => setIsEditing(!isEditing)}
         className="absolute top-[-10] right-2 w-10 h-10 z-[55] bg-primary-yellow p-[10] text-white rounded-full shadow-lg transition-all duration-300 ease-in-out hover:text-primary-yellow hover:scale-105 hover:shadow-md hover:bg-secondary-yellow active:opacity-90 active:scale-95 active:shadow-inner active:text-white"
       >
@@ -51,7 +61,7 @@ export const ChallengeCard: React.FC<ChallengeCardProps> = ({
           icon={faPencil} 
           className="w-5 h-5"
         />
-      </button>
+      </button>)}      
 
       <div className="relative max-w-xs min-w-xs h-[400] bg-white shadow-lg rounded-xl flex flex-col p-0 m-4">
 
@@ -90,17 +100,16 @@ export const ChallengeCard: React.FC<ChallengeCardProps> = ({
             </div>
 
             <div className="flex flex-row h-full w-fit px-5 py-2 flex justify-center items-center rounded-full bg-secondary-yellow shadow-md">
-            {completed ? (
-              <p className="text-green-700 font-bold">Completed</p>
-            ) : isEditing ? (
-              <input
-                type="number"
-                value={amount}
-                onChange={handleAmountChange}
-                className="w-16 text-center bg-white rounded-md shadow-sm border border-gray-300"
-              />
-            ) : (
-              <p>${amount} / ${goalAmount}</p>
+            {completed 
+              ? (<p className="text-green-500  font-bold">Completed!!</p>) 
+              : (isEditing 
+                ? (<input
+                    type="number"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    className="w-16 h-6 text-center bg-white rounded-md shadow-sm border border-white appearance-none"
+                  />) 
+                : (<p>${amount} / ${goalAmount}</p>)
             )}
             </div>
           </div>
