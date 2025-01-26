@@ -7,3 +7,13 @@ export interface ChallengeCardProps {
     onClick: MouseEventHandler;
 }
 
+export interface Buttons {
+    title: string;
+    onClick: MouseEventHandler;
+}
+
+export interface CardProps {
+    title: string;
+    image: string;
+}
+
