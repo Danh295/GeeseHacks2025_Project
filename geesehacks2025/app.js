@@ -29,6 +29,16 @@ const openai = new OpenAI({ apiKey });
 let conversationHistory = [];
 let currentChallenge = null;
 
+
+app.get("/api/challenges", async (req, res) => {
+  try {
+    const challenges = await client.db("sunlife_chats").collection("chats").find().toArray()
+    res.status(200).json({ challenges });
+  } catch (error) {
+    console.error("Error retrieving challenges:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 // Endpoint to handle incoming messages
 app.post("/api/message", async (req, res) => {
   const userMessage = req.body.message;
@@ -38,7 +48,7 @@ app.post("/api/message", async (req, res) => {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
@@ -51,10 +61,11 @@ app.post("/api/message", async (req, res) => {
             "description": string, // Brief description of the goal
             "currentAmount": number, // Current amount saved
             "goalAmount": number,  // Total amount to save
-            "reward": string,      // A reward for completing the goal
-            "image": string        // Placeholder for an image or image description
+            "reward": number,      // A reward for completing the goal
+            "image": string,        // Find a relevant image URL yourself based on the goal
+            "completionDate": string // Date the goal should be completed by
           }
-          Always include the updated "Challenge" object in JSON format in the challengeUpdate but not in the reply so that it can be used by the frontend
+          Always include the updated "Challenge" object in JSON format in the challengeUpdate but not in the actual content of the message the user sees so that it can be used by the frontend
           If the user doesn’t want to set up a goal, engage them in a friendly, natural conversation about financial topics. 
           Keep responses conversational, use a maximum of 2 sentences, and add emojis for a friendly tone. 
           Subtly incorporate SunLife branding into your responses, such as but not 'With SunLife, you've got this! 🌞'.
@@ -83,7 +94,7 @@ app.post("/api/message", async (req, res) => {
     conversationHistory.push({ role: "assistant", content: assistantReply });
     if(challengeUpdate){
       console.log("Challenge Update: ", challengeUpdate)
-        const result = await client.db("sunlife_chats").collection("chats").insertOne(challengeUpdate)
+      const result = await client.db("sunlife_chats").collection("chats").insertOne(challengeUpdate)
         console.log(`New challenge created with the following id: ${result.insertedId}`)
     }
     res.status(200).json({ reply: assistantReply, challenge: challengeUpdate });
