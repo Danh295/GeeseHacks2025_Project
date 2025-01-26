@@ -7,6 +7,7 @@ export interface ChallengeCardProps {
     goalAmount: number;
     reward: number;
     image: string;
+    completionDate: string;
     
 }
 

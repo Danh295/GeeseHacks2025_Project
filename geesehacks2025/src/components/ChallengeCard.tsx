@@ -14,6 +14,7 @@ export const ChallengeCard: React.FC<ChallengeCardProps> = ({
   goalAmount,
   reward,
   image,
+  completionDate,
 }) => {
   // Calculate progress percentage
   const progress =  (currentAmount / goalAmount) * 100;

@@ -28,6 +28,7 @@ export default function Home() {
             goalAmount: isNaN(Number(item.goalAmount)) ? 0 : Number(item.goalAmount), // Default to 0 if invalid
             image: item.image || "/default-image.jpg", // Default image if not provided
             reward: item.reward || "No reward specified", // Default reward if not provided
+            completionDate: item.completionDate || "No completion date specified", // Default completion date if not provided
           };
   
           return challenge;

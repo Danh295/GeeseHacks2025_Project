@@ -62,7 +62,8 @@ app.post("/api/message", async (req, res) => {
             "currentAmount": number, // Current amount saved
             "goalAmount": number,  // Total amount to save
             "reward": number,      // A reward for completing the goal
-            "image": string        // Find a relevant image URL yourself based on the goal
+            "image": string,        // Find a relevant image URL yourself based on the goal
+            "completionDate": string // Date the goal should be completed by
           }
           Always include the updated "Challenge" object in JSON format in the challengeUpdate but not in the actual content of the message the user sees so that it can be used by the frontend
           If the user doesn’t want to set up a goal, engage them in a friendly, natural conversation about financial topics. 

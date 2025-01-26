@@ -24,6 +24,7 @@ export default function ChallengesContainer ({ challenges }: { challenges: Chall
                 goalAmount={challenge.goalAmount}
                 reward={challenge.reward}
                 image={challenge.image}
+                completionDate={challenge.completionDate}
                 />
             </div>
           ))}
