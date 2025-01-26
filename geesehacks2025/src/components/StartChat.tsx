@@ -41,11 +41,6 @@ export default function StartChat() {
                       <HiOutlineArrowRight className="h-6 w-6" />
                         </Button>
                     </div>
-                
-
-        
-      
-
     </main>
 )
 }
