@@ -4,10 +4,11 @@
 const express = require("express");
 const cors = require("cors");
 const { OpenAI } = require("openai");
-
+require('dotenv').config();
 const { zodResponseFormat } = require("openai/helpers/zod");
 const { z } = require("zod");
 const app = express();
+const apiKey = process.env.API_KEY;
 app.use(express.json());
 app.use(cors());
 
@@ -21,7 +22,7 @@ const Challenge = z.object({
     image: z.string(),
   });
   
-
+const openai = new OpenAI({apiKey: apiKey});
 
 app.post("/api/message", async (req, res) => {
   const userMessage = req.body.message;
