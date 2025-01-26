@@ -6,7 +6,7 @@ import React from 'react'
 
 export default function LearnPage() {
     return (
-        <main className="flex flex-col items-center justify-center m-h-screen bg-gray-100">
+        <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-3/4 max-w-3xl bg-white shadow-md rounded-2xl p-4 space-y-4">
               <Label>Financial Literacy Tools</Label>
               <div className="flex flex-row space-x-3 h-96 overflow-x-auto p-2">
@@ -47,8 +47,6 @@ export default function LearnPage() {
       </p>
     </Card>
     </div>
-
-    
         
       </div>
       </main>
