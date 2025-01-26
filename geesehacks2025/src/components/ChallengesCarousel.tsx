@@ -18,12 +18,12 @@ export default function ChallengesContainer ({ challenges }: { challenges: Chall
           {challenges.map((challenge, index) => (
             <div key={index}>
               <ChallengeCard 
-                key={index}
-                title={challenge.title} 
+                name={challenge.name}
                 description={challenge.description}
-                imgSrc={challenge.imgSrc}
-                deadline={challenge.deadline}
-                onClick={challenge.onClick} 
+                currentAmount={challenge.currentAmount}
+                goalAmount={challenge.goalAmount}
+                reward={challenge.reward}
+                image={challenge.image}
                 />
             </div>
           ))}

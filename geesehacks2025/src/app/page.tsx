@@ -1,57 +1,58 @@
 "use client";
-import Image from "next/image";
-
-import { ChallengeCardProps } from '@/types/index';
-import ChallengeCard from "@/components/ChallengeCard";
+import { useEffect, useState } from "react";
 import ChallengesContainer from "@/components/ChallengesCarousel";
+import { ChallengeCardProps } from "@/types/index";
 
 export default function Home() {
+  const [challengeList, setChallengeList] = useState<ChallengeCardProps[]>([]);
 
-  const challenges: ChallengeCardProps[] = [
-    {
-      title: "Challenge Title 1",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      imgSrc: "https://media.istockphoto.com/id/184860418/photo/pink-piggybank-stuffed-with-dollar-bills.jpg?s=612x612&w=0&k=20&c=dzeO2lVaZfirFtLtKJtO8Q0RIn1kOnFgp3TzLDMdYOM=",
-      deadline: 20,
-      onClick: () => {
-        // Navigate to the challenge page
+  const getChallenges = async () => {
+    try {
+      const response = await fetch("http://localhost:5005/api/challenges");
+      const data = await response.json();
+  
+      // Log the data to check its structure
+      console.log("API Response:", data);
+  
+      // Check if challenges property exists and is an array with length
+      if (data.challenges && Array.isArray(data.challenges) && data.challenges.length > 0) {
+        // Map JSON response to ChallengeCardProps format
+        const mappedChallenges: ChallengeCardProps[] = data.challenges.map((item: any) => {
+          
+          // Explicitly construct each ChallengeCardProps object
+          const challenge: ChallengeCardProps = {
+            
+            name: item.name || "Untitled Challenge", // Default name if not provided
+            description: item.description || "No description provided.", // Default description if not provided
+            currentAmount: isNaN(Number(item.currentAmount)) ? 0 : Number(item.currentAmount), // Default to 0 if invalid
+            goalAmount: isNaN(Number(item.goalAmount)) ? 0 : Number(item.goalAmount), // Default to 0 if invalid
+            image: item.image || "/default-image.jpg", // Default image if not provided
+            reward: item.reward || "No reward specified", // Default reward if not provided
+          };
+  
+          return challenge;
+        });
+  
+        setChallengeList(mappedChallenges);
+      } else {
+        console.log("No challenges found or invalid data format.");
+        setChallengeList([]); // Handle accordingly
       }
-    },
-    {
-      title: "Challenge Title 2",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      imgSrc: "https://media.istockphoto.com/id/184860418/photo/pink-piggybank-stuffed-with-dollar-bills.jpg?s=612x612&w=0&k=20&c=dzeO2lVaZfirFtLtKJtO8Q0RIn1kOnFgp3TzLDMdYOM=",
-      deadline: 40,
-      onClick: () => {
-        // Navigate to the challenge page
-      }
-    },
-    {
-      title: "Challenge Title 3",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      imgSrc: "https://media.istockphoto.com/id/184860418/photo/pink-piggybank-stuffed-with-dollar-bills.jpg?s=612x612&w=0&k=20&c=dzeO2lVaZfirFtLtKJtO8Q0RIn1kOnFgp3TzLDMdYOM=",
-      deadline: 50,
-      onClick: () => {
-        // Navigate to the challenge page
-      }
-    },
-    {
-      title: "Challenge Title 4",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      imgSrc: "https://media.istockphoto.com/id/184860418/photo/pink-piggybank-stuffed-with-dollar-bills.jpg?s=612x612&w=0&k=20&c=dzeO2lVaZfirFtLtKJtO8Q0RIn1kOnFgp3TzLDMdYOM=",
-      deadline: 60,
-      onClick: () => {
-        // Navigate to the challenge page
-      }
+    } catch (error) {
+      console.error("Error fetching challenges:", error);
     }
-  ]
+  };
+  
+  
+  
+
+  useEffect(() => {
+    getChallenges();
+  }, []);
 
   return (
     <div>
-      <ChallengesContainer challenges={challenges} />
-
-
-    
+      <ChallengesContainer challenges={challengeList} />
     </div>
   );
 }
